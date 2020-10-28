@@ -1,9 +1,11 @@
 # John Lorenz IV 
-import monsters
+import dungeon as d
+import player
+DEFAULT_DIFFICULTY = 1
 
 def play():
-    bestiary = monsters.bestiary()
-    bestiary.test()
+    dungeon = d.dungeon(DEFAULT_DIFFICULTY)
+    dungeon.test()
 
 def main():
     play()
