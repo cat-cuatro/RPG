@@ -1,3 +1,6 @@
+import random
+random.seed()
+
 class monster:
     def __init__(self):
         raise NotImplementedError
@@ -58,28 +61,38 @@ class wolf(beast):
 
 
 
-### Monster Generator/Catalog
+### Monster Generator/Catalog ###
 class bestiary:
-    def __init__(self):
-        self.beasts = self.beasts()
-        self.abomination = self.abominations()
+    def __init__(self): # Monster archtype lists are dict name -> object mappings
+        self.beasts = self.dictBeasts() 
+        self.abominations = self.dictAbominations()
     
-    def generateLowLevelMonster(self, level=1):
-        pass
+    def generateLowLevelMonster(self, quantity, level=1):
+        outcomes = [self.beasts, self.abominations]
+        monsters = []
+        for _ in range(0, quantity):
+            for _ in range(0, len(outcomes)):
+                index = random.randint(0, len(outcomes)-1) # Select a random archtype
+                chosenArchtype = outcomes[index]
+                keys = [*chosenArchtype]
+                index = random.randint(0, len(chosenArchtype)-1) # Select a random monster in its archtype
+            monsters.append(chosenArchtype[keys[index]])
+        return monsters
 
     def test(self):
         print(len(self.beasts))
         for beast in self.beasts:
             print(self.beasts[beast].retrieveStats())
+        print(self.generateLowLevelMonster(3))
 
-    def beasts(self):
+    def dictBeasts(self):
         beast_list = {
             'wolf': wolf(),
             'rat': rat(),
         }
         return beast_list
     
-    def abominations(self):
+    def dictAbominations(self):
         abomination_list = {
             'slime': slime(),
         }
