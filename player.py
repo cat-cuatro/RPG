@@ -8,7 +8,7 @@ class player:
             self.attack = 10
             self.defense = 10
             self.intellect = 10
-            self.role = combatClassType()
+            self.role = combatClassType(bonus=self.addToStats)
 
     def load(self, profile):
         # if a player profile exists, unpack it and pass as a dictionary
@@ -28,18 +28,24 @@ class player:
         self.role.printStats()
 
     def addToStats(self, bonusList):
-        
+        self.health += bonusList[1]
+        self.attack += bonusList[2]
+        self.defense += bonusList[3]
+        self.intellect += bonusList[4]
 
 class combatClassType:
     #TODO: This method isn't very self-descriptive. Explore using @classmethods in the future as a replacement
     def __init__(self, *args, **kwargs):
-        if len(kwargs) > 0:
+        applyBonuses = kwargs['bonus']
+        if len(kwargs) > 1:
             self.load(kwargs['profile'])
         else:
-            self.role = self.selectCombatRole()
+            self.role = None
+            bonuses = self.selectCombatRole()
             self.charisma = 0
             self.luck = 0
             self.perception = 0
+            applyBonuses(bonuses)
 
     def load(self, profile):
         self.role = profile['role']
@@ -55,7 +61,8 @@ class combatClassType:
                 break
             except ValueError:
                 print('I did not recognize that option.')
-        bonuses = roleBonusLookup(choice)
+        bonuses = self.roleBonusLookup(choice)
+        return bonuses
 
     def menu(self):
         print('Please select a class for your adventurer.')
@@ -74,6 +81,7 @@ class combatClassType:
             4: ['Bard', 15, 5, 25, 20],
             5: ['Mercenary', 25, 15, 5, 10],
         }
+        self.role = availableRoles[selection][0]
         return availableRoles[selection]
 
     def printStats(self):

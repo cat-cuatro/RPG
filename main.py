@@ -17,7 +17,7 @@ TEST_PROFILE = {
 
 def play():
     dungeon = d.dungeon(DEFAULT_DIFFICULTY)
-    admin = p.player(TEST_PROFILE)
+    admin = p.player()
     admin.printStats()
     
 
