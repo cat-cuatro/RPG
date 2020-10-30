@@ -27,6 +27,9 @@ class player:
         print('intellect:', self.intellect)
         self.role.printStats()
 
+    def addToStats(self, bonusList):
+        
+
 class combatClassType:
     #TODO: This method isn't very self-descriptive. Explore using @classmethods in the future as a replacement
     def __init__(self, *args, **kwargs):
@@ -45,7 +48,14 @@ class combatClassType:
         self.perception = profile['perception']
 
     def selectCombatRole(self):
-        pass
+        while True:
+            try:
+                self.menu()
+                choice = int(input(''))
+                break
+            except ValueError:
+                print('I did not recognize that option.')
+        bonuses = roleBonusLookup(choice)
 
     def menu(self):
         print('Please select a class for your adventurer.')
@@ -54,6 +64,17 @@ class combatClassType:
         print('3. Knight')
         print('4. Bard')
         print('5. Mercenary')
+
+    def roleBonusLookup(self, selection):
+        availableRoles = {
+            # Format: [ROLE, HP_Bonus, ATK_Bonus, DEF_Bonus, INT_bonus]
+            1: ['Barbarian', 50, 20, 5, 0],
+            2: ['Thief', 25, 10, 5, 15],
+            3: ['Knight', 35, 10, 20, 10],
+            4: ['Bard', 15, 5, 25, 20],
+            5: ['Mercenary', 25, 15, 5, 10],
+        }
+        return availableRoles[selection]
 
     def printStats(self):
         print('Combat Role stats:')

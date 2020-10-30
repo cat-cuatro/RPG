@@ -1,4 +1,4 @@
-# John Lorenz IV 
+# John Lorenz IV // Simple RPG program
 import dungeon as d
 import player as p
 DEFAULT_DIFFICULTY = 1
