@@ -1,7 +1,7 @@
 import random
 random.seed()
 
-class monster:
+class Monster:
     def __init__(self):
         raise NotImplementedError
     
@@ -21,38 +21,38 @@ class monster:
         pass
 
 ######### Monster archtypes ##########
-class archtype(monster):
+class Archtype(Monster):
     def __init__(self):
         raise NotImplementedError
     
-class abomination(archtype):
+class Abomination(Archtype):
     def __init__(self):
         raise NotImplementedError
 
-class undead(archtype):
+class Undead(Archtype):
     def __init__(self):
         raise NotImplementedError
 
-class beast(archtype):
+class Beast(Archtype):
     def __init__(self):
         raise NotImplementedError
 ######################################
 
-class slime(abomination):
+class Slime(Abomination):
     def __init__(self):
         self.name = 'Slime'
         self.health = 10
         self.attack = 2
         self.defense = 2
 
-class rat(beast):
+class Rat(Beast):
     def __init__(self):
         self.name = 'Rat'
         self.health = 5
         self.attack = 1
         self.defense = 1
 
-class wolf(beast):
+class Wolf(Beast):
     def __init__(self):
         self.name = 'Wolf'
         self.health = 10
@@ -62,8 +62,8 @@ class wolf(beast):
 
 
 ### Monster Generator/Catalog ###
-class bestiary:
-    def __init__(self): # Monster archtype lists are dict name -> object mappings
+class Bestiary:
+    def __init__(self): # Monster Archtype lists are dict name -> object mappings
         self.beasts = self.dictBeasts() 
         self.abominations = self.dictAbominations()
     
@@ -72,29 +72,29 @@ class bestiary:
         monsters = []
         for _ in range(0, quantity):
             for _ in range(0, len(outcomes)):
-                index = random.randint(0, len(outcomes)-1) # Select a random archtype
+                index = random.randint(0, len(outcomes)-1) # Select a random Archtype
                 chosenArchtype = outcomes[index]
                 keys = [*chosenArchtype]
-                index = random.randint(0, len(chosenArchtype)-1) # Select a random monster in its archtype
+                index = random.randint(0, len(chosenArchtype)-1) # Select a random Monster in its Archtype
             monsters.append(chosenArchtype[keys[index]])
         return monsters
 
     def test(self):
         print(len(self.beasts))
-        for beast in self.beasts:
-            print(self.beasts[beast].retrieveStats())
+        for Beast in self.beasts:
+            print(self.beasts[Beast].retrieveStats())
         print(self.generateLowLevelMonster(3))
 
     def dictBeasts(self):
         beast_list = {
-            'wolf': wolf(),
-            'rat': rat(),
+            'Wolf': Wolf(),
+            'Rat': Rat(),
         }
         return beast_list
     
     def dictAbominations(self):
         abomination_list = {
-            'slime': slime(),
+            'Slime': Slime(),
         }
         return abomination_list
 

@@ -1,4 +1,4 @@
-class player:
+class Player:
     def __init__(self, profile=None):
         if profile != None:
             self.load(profile)
@@ -8,7 +8,8 @@ class player:
             self.attack = 10
             self.defense = 10
             self.intellect = 10
-            self.role = combatClassType(bonus=self.addToStats)
+            self.role = CombatClassType(bonus=self.addToStats)
+        self.playerLocation = 1 # Floor 1
 
     def load(self, profile):
         # if a player profile exists, unpack it and pass as a dictionary
@@ -17,7 +18,7 @@ class player:
         self.health = profile['health']
         self.defense = profile['defense']
         self.intellect = profile['intellect']
-        self.role = combatClassType(profile=profile)
+        self.role = CombatClassType(profile=profile)
 
     def printStats(self):
         print('Player Stats:')
@@ -33,7 +34,13 @@ class player:
         self.defense += bonusList[3]
         self.intellect += bonusList[4]
 
-class combatClassType:
+    def retrieveLocation(self):
+        return 'Floor '+str(self.playerLocation)
+    
+    def movePlayer(self, newLocation):
+        self.playerLocation = 'Floor '+str(newLocation)
+
+class CombatClassType:
     #TODO: This method isn't very self-descriptive. Explore using @classmethods in the future as a replacement
     def __init__(self, *args, **kwargs):
         applyBonuses = kwargs['bonus']

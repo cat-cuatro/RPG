@@ -1,7 +1,7 @@
 # John Lorenz IV // Simple RPG program
 import dungeon as d
 import player as p
-DEFAULT_DIFFICULTY = 1
+DEFAULT_DIFFICULTY = 2
 
 TEST_PROFILE = {
     'name' : 'Cuatro',
@@ -15,14 +15,18 @@ TEST_PROFILE = {
     'perception': 100,
 }
 
+def tests():
+    dungeon = d.Dungeon(DEFAULT_DIFFICULTY)
+    dungeon.test()
+
 def play():
-    dungeon = d.dungeon(DEFAULT_DIFFICULTY)
-    admin = p.player()
-    admin.printStats()
+    dungeon = d.Dungeon(DEFAULT_DIFFICULTY)
+    admin = p.Player()
     
 
 def main():
     play()
 
 if __name__ == "__main__":
+    tests()
     main()
