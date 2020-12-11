@@ -15,6 +15,9 @@ TEST_PROFILE = {
     'perception': 100,
 }
 
+def iAmTrue():
+    return True
+
 def tests():
     dungeon = d.Dungeon(DEFAULT_DIFFICULTY)
     dungeon.test()
